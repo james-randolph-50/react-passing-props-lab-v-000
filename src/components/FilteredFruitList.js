@@ -1,16 +1,18 @@
 import React from 'react';
 
-const Filter = ({ filters, handleChange }) => 
-  <select onChange={handleChange} defaultValue='all'>
-    <option value='all'>All</option>
-    {filters.map(filter =>
-      <option key={filter} value={filter}>{filter}</option>
-    )}
-  </select>;
+const FilteredFruitList = ({ fruit, filter }) => {
+  const fruitList = !filter ?  fruit : fruit.filter(item => item.fruit_type === filter);
 
-Filter.defaultProps = {
-  filters: [],
-  handleChange: function() {}
+  return (
+    <ul className="fruit-list">
+      {fruitList.map((fruit, index) => <li key={index}>{fruit.char}</li>)}
+    </ul>
+  );
 };
 
-export default Filter;
+FilteredFruitList.defaultProps = {
+  fruit: [],
+  filter: null
+};
+
+export default FilteredFruitList;
